@@ -11,7 +11,7 @@ import NewRoomModal from '../components/newroommodal'
 function ExplorePage() {
     const [showModal, setShowModal] = useState(false);
     return (
-        <div>
+        <div id='main'>
             <SearchBar/>
             <Container>
                 <Videos/>

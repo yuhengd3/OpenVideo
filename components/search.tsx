@@ -56,6 +56,7 @@ function SearchBar() {
                     />
                     </div>
                     <ProfileDropDown visible={isVisible} onClose={()=>setIsVisible(false)}></ProfileDropDown>
+                   
                     <style jsx global>{`
                         .avatar {
                         border-radius: 30%;
