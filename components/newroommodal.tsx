@@ -8,6 +8,7 @@ import Videos from './videos'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faClose } from '@fortawesome/free-solid-svg-icons'
 import {Row, Col, Button, Container, Form, FormControl, Toast} from 'react-bootstrap'
+import {API_KEY} from "../pages/_app"
 interface ModalProps {
     show: boolean;
     onClose: ()=>void;
@@ -37,7 +38,7 @@ function NewRoomModal(props: ModalProps) {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            Authorization: "Bearer KEY0181F9416661F51EC827E56F73BCF067_G2Rz8eCk8pMjWw1vFUxYxy",
+            Authorization: `Bearer ${API_KEY}`,
         },
         method: "POST"
         })
