@@ -11,8 +11,8 @@ function RoomThumbnail(props:any) {
         <div 
         className = {styles.room}
         onClick = {handleClick}>
-            <img width = "300px" height = "200px" src = {props.img}></img>
-            <p>{props.name}</p>
+            <img width = "300px" height = "180px" src = {props.img}></img>
+            <p><b>{props.name}</b></p>
             <p>{props.description}</p>  
             <p>Number of participants: {props.participants}</p>
 

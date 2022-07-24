@@ -2,8 +2,9 @@
     display: inline-block;
     max-width: 23%;
     max-height: 20%;
-    background-color: gray;
+    background-color: #ffffff;
     text-align: center;
     margin-right: 2%;
     margin-bottom: 2%;
+    border-radius: 10px;
 }
