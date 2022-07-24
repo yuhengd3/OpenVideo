@@ -4,6 +4,7 @@ import Image from 'next/image'
 // import styles from '../styles/Home.module.css'
 
 import LogIn from './login';
+import SignUp from './signup';
 
 const Home: NextPage = () => {
   return (
@@ -21,7 +22,11 @@ const Home: NextPage = () => {
         {/* <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1> */}
+        
+        
         <LogIn/>
+        <SignUp/>
+
         {/* <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.tsx</code>
