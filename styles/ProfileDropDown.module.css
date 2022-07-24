@@ -16,7 +16,7 @@
     margin: auto;
     width: 300px;
     height: 350px;
-    z-index: 20000;
+    z-index: 200000;
     border-color:black; 
     text-align: center;
     background-color: #fff;
@@ -76,4 +76,11 @@
     position: absolute;
     width: 100%;
     bottom: 15px;
+}
+
+.overlay {
+    position: absolute;
+    width: 100vw;
+    height:100vh;
+    right:0px;
 }

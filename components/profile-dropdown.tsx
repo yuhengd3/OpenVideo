@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import styles from '../styles/ProfileDropDown.module.css'
+import { useEffect } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faCircleQuestion, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
@@ -18,14 +19,23 @@ interface ModalProps {
 }
 const ProfileDropDown = (props: ModalProps) => {
     const {visible, onClose} = props;
+    
     //const [isVisible, setIsVisible] = useState(false);
-
+    const handleClose = () => {
+        
+            onClose();
+        
+        
+    }
     //console.log('init',isVisible);
 
     return (
         <div className={styles.drop}>
+            <div className={styles.overlay} onClick={handleClose}></div>
             {visible ? 
+            
                 <div className={`shadow p-3 mb-5 bg-white rounded ${styles.dropDown}`}>
+                    
                     <div>
                         <div className={styles.imageContainer}>
                             <Image 
@@ -54,10 +64,13 @@ const ProfileDropDown = (props: ModalProps) => {
                             <h6 className={styles.content}>Log Out</h6>
                         </div>
                     </div>
+                    
                 </div> 
-            : null}
+            : null
+            }
             
-        </div>          
+        </div>   
+               
     )
 }
 
