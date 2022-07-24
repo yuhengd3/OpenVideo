@@ -4,31 +4,24 @@ import Image from 'next/image'
 import {Toast, Row, Col, Button, Container, Form, FormControl} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
-import { useRouter } from 'next/router'
-import { useAuth } from '../context/authContext'
+import NewRoomModal from './newroommodal'
+import {useState} from 'react'
+import ProfileDropDown from './profile-dropdown'
 function SearchBar() {
+    const [showModal, setShowModal] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
-    const {user,logout} = useAuth()
-    const router = useRouter()
     const handleClick = () => {
         console.log("handle click");
-        return (
-            <>
-                <Toast>
-                    <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
-                </Toast>
-            </>
-        )
+
     }
-
-
     return (
         <div>
         <Head>
             <script src="https://kit.fontawesome.com/de35c48656.js" crossOrigin="anonymous"></script>
         </Head>
         <main>
-        <Container fluid>
+        <Container fluid  className={styles.layer}>
             <Row className="mt-3 mx-auto">
                 <Col className={`col-2 mt-3 `}>
                     <div className={styles.right} >
@@ -44,17 +37,17 @@ function SearchBar() {
                     <div className="input-group shadow p-1 mb-5 bg-white rounded">
                         <input className="form-control border-0" type="text" placeholder="Search" id="example-search-input"/>
                         <span className="input-group-append">
-                            <button className="btn bg-white border-0 ms-n3" type="button">
+                            <button className="btn border-0" type="button">
                                 <i className={`fa-solid fa-magnifying-glass fa-lg ${styles.icon}`}></i>
                             </button>
                         </span>
                     </div>
                 </Col>
                 <Col className="col-1 mt-3">
-                    <i className={`fa-solid fa-circle-plus fa-xl ${styles.icon}`}></i>
+                    <i className={`fa-solid fa-circle-plus fa-xl ${styles.icon}`} onClick={() => setShowModal(true)}></i>
                     <div className={styles.image_wrapper} >
                     <img
-                        onClick={handleClick}
+                        onClick={() => setIsVisible(true)}
                         className="avatar"
                         src="/images/profile.jpg" // Route of the image file
                         height={30} // Desired size with correct aspect ratio
@@ -62,21 +55,19 @@ function SearchBar() {
                         alt="Your Name"
                     />
                     </div>
+                    <ProfileDropDown visible={isVisible} onClose={()=>setIsVisible(false)}></ProfileDropDown>
+                   
                     <style jsx global>{`
                         .avatar {
                         border-radius: 30%;
                         }
                     `}</style>
-                    <Button 
-                    onClick = {()=> {
-                        logout()
-                        router.push('/login')
-                    }}
-                    className={styles.ourButton}>Logout</Button>
+                    {/*<Button className={styles.ourButton}>test</Button>>*/}
                 </Col>
                
             
             </Row>
+            <NewRoomModal show={showModal} onClose={()=>setShowModal(false)}></NewRoomModal>
         </Container>
         </main>
         </div>

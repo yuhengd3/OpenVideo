@@ -8,6 +8,7 @@ import 'firebase/firestore';
 
 import { getDatabase } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,8 +26,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-//const db = getA.ref();
+const db = getFirestore(app);
+//const db = getApp.ref();
 
 //export default db;
 export const auth = getAuth()
-export default firebase;
+export {db, firebase};
+
+
+export async function getRooms(db:any) {
+  const rooms = collection(db,'rooms');
+  const roomsSnapshot = await getDocs(rooms);
+  const roomsList = roomsSnapshot.docs.map(doc => doc.data());
+  return roomsList;
+}

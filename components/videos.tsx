@@ -8,31 +8,33 @@ import RoomThumbnail from './RoomThumbnail'
 import { useState } from 'react'
 import 'firebase/firestore'
 
-import db from '../config/firebase'
+
+import {collection} from 'firebase/firestore/';
 
 import * as firebase from "firebase/app"
+
+import {getRooms} from "../config/firebase"
+import {useEffect} from "react"
 
 // var db = firebase.firestore()
 
 function Videos() {
-    const [info , setInfo] = useState([]);
+    
 
-    window.addEventListener('load', () => {
-        Fetchdata();
-      });
+        // let data = collection(db,'rooms');  
 
-      const Fetchdata = ()=>{
-        db.collection("rooms").get().then((querySnapshot:any) => {
+        // db.collection("rooms").get().then((querySnapshot:any) => {
              
-            // Loop through the data and store
-            // it in array to display
-            querySnapshot.forEach(element => {
-                var data = element.data();
-                setInfo(arr => [...arr , data]);
+        //     // Loop through the data and store
+        //     // it in array to display
+        //     querySnapshot.forEach(element => {
+        //         var data = element.data();
+        //         setInfo(arr => [...arr , data]);
                   
-            });
-        })
-    }
+        //     });
+        // })
+
+    
     
     return (
         <div className = "videos">
