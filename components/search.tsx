@@ -6,17 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import NewRoomModal from './newroommodal'
 import {useState} from 'react'
+import ProfileDropDown from './profile-dropdown'
 function SearchBar() {
     const [showModal, setShowModal] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+
     const handleClick = () => {
         console.log("handle click");
-        return (
-            <>
-                <Toast>
-                    <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
-                </Toast>
-            </>
-        )
+
     }
     return (
         <div>
@@ -24,7 +21,7 @@ function SearchBar() {
             <script src="https://kit.fontawesome.com/de35c48656.js" crossOrigin="anonymous"></script>
         </Head>
         <main>
-        <Container fluid>
+        <Container fluid  className={styles.layer}>
             <Row className="mt-3 mx-auto">
                 <Col className={`col-2 mt-3 `}>
                     <div className={styles.right} >
@@ -50,7 +47,7 @@ function SearchBar() {
                     <i className={`fa-solid fa-circle-plus fa-xl ${styles.icon}`} onClick={() => setShowModal(true)}></i>
                     <div className={styles.image_wrapper} >
                     <img
-                        onClick={handleClick}
+                        onClick={() => setIsVisible(true)}
                         className="avatar"
                         src="/images/profile.jpg" // Route of the image file
                         height={30} // Desired size with correct aspect ratio
@@ -58,6 +55,7 @@ function SearchBar() {
                         alt="Your Name"
                     />
                     </div>
+                    <ProfileDropDown visible={isVisible} onClose={()=>setIsVisible(false)}></ProfileDropDown>
                     <style jsx global>{`
                         .avatar {
                         border-radius: 30%;
