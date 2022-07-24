@@ -12,27 +12,36 @@ import { doc, setDoc } from '@firebase/firestore'
 import 'firebase/firestore';
 import { firestore } from '../config/firebase'
 
+<<<<<<< HEAD
 // import db from '../config/firebase'
+=======
+
+import {collection} from 'firebase/firestore/';
+>>>>>>> elen
 
 
 
 // import * as firebase from "firebase/app"
 
+import {getRooms} from "../config/firebase"
+import {useEffect} from "react"
+
 // var db = firebase.firestore()
 
 function Videos() {
-    const [info , setInfo] = useState([]);
+    
 
-    window.addEventListener('load', () => {
-        Fetchdata();
-      });
+        // let data = collection(db,'rooms');  
 
+<<<<<<< HEAD
       // db.collection('users').add({room_id: '1234234'});
 
       const Fetchdata = ()=>{
         const c = collection(firestore, "rooms")
         
         // const userCollection = db.collection('users').add({room_id: '1234234'});
+=======
+>>>>>>> elen
         // db.collection("rooms").get().then((querySnapshot:any) => {
              
         //     // Loop through the data and store
@@ -43,6 +52,7 @@ function Videos() {
                   
         //     });
         // })
+<<<<<<< HEAD
         const getUsers = async () => {
             const userRef = doc(c, 'user_12345');
             await setDoc(userRef, {
@@ -58,6 +68,10 @@ function Videos() {
     useEffect(()=> {
         Fetchdata();
     })
+=======
+
+    
+>>>>>>> elen
     
     return (
         <div className = "videos">
