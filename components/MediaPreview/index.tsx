@@ -18,7 +18,7 @@ const breakpointMedium = 530;
 const breakpointLarge = 1450;
 
 const VideoPreview = styled.div`
-  position: relative;
+  position: absolute;
   background-color: #202124;
   border-radius: 8px;
   overflow: hidden;
@@ -119,11 +119,18 @@ function MediaPreview() {
         width: '100%',
       }}
     >
+    <h3
+      style={{
+        margin: '60px 0 0 0',
+        color: '#0DCAF0',
+      }}
+    >Smile and be ready!!</h3>
       {error && (
         <ErrorDialog onClose={() => setError(undefined)} error={error} />
       )}
 
       <VideoPreview id='preview-video'>
+      
         {isVideoTrackEnabled ? (
           <div
             style={{
@@ -189,8 +196,7 @@ function MediaPreview() {
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
-          }}
-        >
+          }}>
           <MediaControlBar
             audioInputDeviceId={audioInputDeviceId}
             videoInputDeviceId={videoInputDeviceId}
