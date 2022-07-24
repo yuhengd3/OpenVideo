@@ -34,7 +34,7 @@
 
 .image_wrapper {
     margin-left: 50px;
-    margin-top: -28px;
+    margin-top: -4px;
 }
 
 .right {
@@ -43,8 +43,9 @@
 
 .modal {
     background-color: white;
-    width: 500px;
-    border-radius: 20px;
+    width: 700px;
+    height: 400px;
+    border-radius: 10px;
     padding: 20px;
     z-index: 200;
 }
@@ -64,7 +65,7 @@
 
 .inputHeader {
     display: inline-block;
-    width: 87%;
+    width: 60%;
     margin-left: 5px;
     color: #7C7A7A;
 }
