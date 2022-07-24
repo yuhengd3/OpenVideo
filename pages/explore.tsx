@@ -15,8 +15,7 @@ function ExplorePage() {
             <Container>
                 <Videos/>
                 <div id="modal_root"></div>
-                <Button onClick={() => setShowModal(true)}>show modal</Button>
-                <NewRoomModal show={showModal} onClose={()=>setShowModal(false)}></NewRoomModal>
+               
             </Container>
         </div>
         
