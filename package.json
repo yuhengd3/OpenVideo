@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.5",
+    "@telnyx/video": "^0.2.0-alpha.25",
     "bootstrap": "^5.2.0",
     "create-next-app": "^12.2.3",
+    "grommet": "^2.25.0",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
