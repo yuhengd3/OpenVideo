@@ -4,7 +4,10 @@ import Image from 'next/image'
 import {Toast, Row, Col, Button, Container, Form, FormControl} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import NewRoomModal from './newroommodal'
+import {useState} from 'react'
 function SearchBar() {
+    const [showModal, setShowModal] = useState(false);
     const handleClick = () => {
         console.log("handle click");
         return (
@@ -44,7 +47,7 @@ function SearchBar() {
                     </div>
                 </Col>
                 <Col className="col-1 mt-3">
-                    <i className={`fa-solid fa-circle-plus fa-xl ${styles.icon}`}></i>
+                    <i className={`fa-solid fa-circle-plus fa-xl ${styles.icon}`} onClick={() => setShowModal(true)}></i>
                     <div className={styles.image_wrapper} >
                     <img
                         onClick={handleClick}
@@ -65,6 +68,7 @@ function SearchBar() {
                
             
             </Row>
+            <NewRoomModal show={showModal} onClose={()=>setShowModal(false)}></NewRoomModal>
         </Container>
         </main>
         </div>
