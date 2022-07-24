@@ -16,6 +16,7 @@ interface Props {
   // >;
   // clientToken: string;
   // refreshToken: string;
+  setReady: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const JoinRoom = ({
@@ -26,6 +27,7 @@ const JoinRoom = ({
   // updateTokens,
   // clientToken,
   // refreshToken,
+  setReady
 }: Props) => {
   const [error, setError] = useState<
     { title: string; body: string } | undefined
@@ -125,7 +127,7 @@ const JoinRoom = ({
         <Button
           data-testid='btn-join-room'
           primary
-          disabled={true}
+          disabled={false}
           // disabled={!roomId || !username}
           label='Join room'
           onClick={async () => {
@@ -133,6 +135,7 @@ const JoinRoom = ({
             const hasAudioPermission = await checkAudioBrowserPermission();
             if (hasAudioPermission) {
               // joinRoom();
+              setReady(true);
             } else {
               setError(MediaDeviceErrors.mediaBlocked);
             }

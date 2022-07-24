@@ -6,6 +6,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import PropTypes from 'prop-types';
 import { Grid, Main } from 'grommet';
+import { useRouter } from 'next/router';
 
 import { TelnyxRoom } from '../../hooks/room';
 import { TelnyxMeetContext } from '../../context/TelnyxMeetContext';
@@ -39,7 +40,10 @@ function getUserName(): string {
   }
 }
 
-const Rooms: NextPage = () => {
+const Join: NextPage = () => {
+  const router = useRouter();
+  console.log(router.query);
+  const room_id = router.query.room_id;
   // const [roomId, setRoomId] = useState<string>();
   const [username, setUsername] = useState<string>('');
   const [tokens, setTokens] = useState<{
@@ -62,6 +66,30 @@ const Rooms: NextPage = () => {
   >();
 
   const unreadMessages = useRef<TelnyxRoom['messages'] | null>(null);
+
+  (function (){
+    // console.log(room_id);
+    fetch('http://localhost:3000/api/client_token', {
+      method: 'POST',
+      body: JSON.stringify({
+        room_id: room_id,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setTokens({
+        clientToken: data.token,
+        refreshToken: data.refresh_token,
+      });
+      console.log("User token: " + data.token);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  })();
 
   const [isAudioTrackEnabled, setIsAudioTrackEnabled] =
     useState<boolean>(false);
@@ -134,10 +162,16 @@ const Rooms: NextPage = () => {
             setIsVideoPlaying,
           }}
         >
+          {isReady ? (
+            <h2>Ready!</h2>
+          ) : 
           <GridPreviewContainer>
             <MediaPreview />
-            <JoinRoom />
+            <JoinRoom 
+              setReady={setIsReady}
+            />
           </GridPreviewContainer>
+          }
           
           {/* {roomId && isReady ? (
             <Room
@@ -171,4 +205,4 @@ const Rooms: NextPage = () => {
   )
 }
 
-export default Rooms
+export default Join
