@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/explore.module.css'
 import Image from 'next/image'
 import SearchBar from '../components/search'
-import ReactPlayer from 'react-player'
+// import ReactPlayer from 'react-player'
 import {Row, Col, Button, Container, Form, FormControl} from 'react-bootstrap'
 
 function Videos() {

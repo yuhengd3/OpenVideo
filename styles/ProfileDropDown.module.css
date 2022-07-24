@@ -16,7 +16,7 @@
     margin: auto;
     width: 300px;
     height: 350px;
- 
+    z-index: 20000;
     border-color:black; 
     text-align: center;
     background-color: #fff;
