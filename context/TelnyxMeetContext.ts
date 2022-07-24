@@ -7,7 +7,7 @@ const TelnyxMeetContext = React.createContext<{
   audioInputDeviceId: string | undefined;
   audioOutputDeviceId: string | undefined;
   videoInputDeviceId: string | undefined;
-//   unreadMessages: React.MutableRefObject<TelnyxRoom['messages'] | null>;
+  unreadMessages: React.MutableRefObject<TelnyxRoom['messages'] | null>;
   setAudioInputDeviceId: Dispatch<SetStateAction<string | undefined>>;
   setAudioOutputDeviceId: Dispatch<SetStateAction<string | undefined>>;
   setVideoInputDeviceId: Dispatch<SetStateAction<string | undefined>>;
@@ -16,16 +16,16 @@ const TelnyxMeetContext = React.createContext<{
   setIsAudioTrackEnabled: Dispatch<SetStateAction<boolean>>;
   setIsVideoTrackEnabled: Dispatch<SetStateAction<boolean>>;
   sendNotification: (message: { body: string }) => void;
-//   networkMetrics: NetworkMetrics | undefined;
-//   setNetworkMetrics: Dispatch<SetStateAction<NetworkMetrics | undefined>>;
-//   optionalFeatures: { [key: string]: boolean };
+  networkMetrics: NetworkMetrics | undefined;
+  setNetworkMetrics: Dispatch<SetStateAction<NetworkMetrics | undefined>>;
+  optionalFeatures: { [key: string]: boolean };
   isVideoPlaying: boolean;
   setIsVideoPlaying: Dispatch<SetStateAction<boolean>>;
 }>({
   audioInputDeviceId: undefined,
   audioOutputDeviceId: undefined,
   videoInputDeviceId: undefined,
-//   unreadMessages: React.createRef<TelnyxRoom['messages'] | null>(),
+  unreadMessages: React.createRef<TelnyxRoom['messages'] | null>(),
 
   setAudioInputDeviceId: (
     value: React.SetStateAction<string | undefined>
@@ -41,11 +41,11 @@ const TelnyxMeetContext = React.createContext<{
   setIsAudioTrackEnabled: (value: React.SetStateAction<boolean>) => {},
   setIsVideoTrackEnabled: (value: React.SetStateAction<boolean>) => {},
   sendNotification: (message: { body: string }) => {},
-//   networkMetrics: undefined,
-//   setNetworkMetrics: (
-//     value: React.SetStateAction<NetworkMetrics | undefined>
-//   ) => {},
-//   optionalFeatures: {},
+  networkMetrics: undefined,
+  setNetworkMetrics: (
+    value: React.SetStateAction<NetworkMetrics | undefined>
+  ) => {},
+  optionalFeatures: {},
   isVideoPlaying: false,
   setIsVideoPlaying: (value: React.SetStateAction<boolean>) => {},
 });

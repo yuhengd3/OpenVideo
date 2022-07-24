@@ -4,21 +4,17 @@ import styled from 'styled-components';
 
 import { TelnyxMeetContext } from '../../context/TelnyxMeetContext';
 
-import { MutableRefObject } from 'react';
-
-import ErrorDialog from '..//ErrorDialog';
+import ErrorDialog from '../ErrorDialog';
 
 import { MediaControlBar } from './MediaControlBar';
-// import { VirtualBackground } from 'utils/virtualBackground';
-
-import { VideoProcessor, Camera } from '@telnyx/video-processors';
+import { VirtualBackground } from '../../utils/virtualBackground';
 
 const breakpointSmall = 400;
 const breakpointMedium = 530;
 const breakpointLarge = 1450;
 
 const VideoPreview = styled.div`
-  position: absolute;
+  position: relative;
   background-color: #202124;
   border-radius: 8px;
   overflow: hidden;
@@ -50,7 +46,7 @@ function MediaPreview() {
     isVideoTrackEnabled,
     setIsAudioTrackEnabled,
     setIsVideoTrackEnabled,
-    // optionalFeatures,
+    optionalFeatures,
   } = useContext(TelnyxMeetContext);
 
   const [localTracks, setLocalTracks] = useState<{
@@ -66,12 +62,9 @@ function MediaPreview() {
   >(undefined);
 
   const videoElRef = useRef<HTMLVideoElement>(null);
-
-  // const camera = useRef() as VirtualBackground['camera'];
-  const camera = useRef() as MutableRefObject<Camera | null>;
+  const camera = useRef() as VirtualBackground['camera'];
   //https://github.com/DefinitelyTyped/DefinitelyTyped/issues/28884#issuecomment-471341041
-  // const videoProcessor = useRef() as VirtualBackground['videoProcessor'];
-  const videoProcessor = useRef() as MutableRefObject<VideoProcessor | null>;
+  const videoProcessor = useRef() as VirtualBackground['videoProcessor'];
 
   useEffect(() => {
     return () => {
@@ -119,18 +112,11 @@ function MediaPreview() {
         width: '100%',
       }}
     >
-    <h3
-      style={{
-        margin: '60px 0 0 0',
-        color: '#0DCAF0',
-      }}
-    >Smile and be ready!!</h3>
       {error && (
         <ErrorDialog onClose={() => setError(undefined)} error={error} />
       )}
 
       <VideoPreview id='preview-video'>
-      
         {isVideoTrackEnabled ? (
           <div
             style={{
@@ -196,7 +182,8 @@ function MediaPreview() {
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
-          }}>
+          }}
+        >
           <MediaControlBar
             audioInputDeviceId={audioInputDeviceId}
             videoInputDeviceId={videoInputDeviceId}
@@ -204,7 +191,7 @@ function MediaPreview() {
             isVideoTrackEnabled={isVideoTrackEnabled}
             setIsAudioTrackEnabled={setIsAudioTrackEnabled}
             setIsVideoTrackEnabled={setIsVideoTrackEnabled}
-            // optionalFeatures={optionalFeatures}
+            optionalFeatures={optionalFeatures}
             localTracks={localTracks}
             setLocalTracks={setLocalTracks}
             setError={setError}

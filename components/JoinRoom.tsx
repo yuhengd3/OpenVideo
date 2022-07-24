@@ -4,7 +4,7 @@ import { Box, Button, TextInput } from 'grommet';
 import ErrorDialog from './ErrorDialog';
 import { MediaDeviceErrors } from './MediaPreview/helper';
 
-// import { saveItem, USERNAME_KEY } from 'utils/storage';
+import { saveItem, USERNAME_KEY } from '../utils/storage';
 
 interface Props {
   // roomId: string;
@@ -101,7 +101,7 @@ const JoinRoom = ({
           round='xsmall'
           pad='small'
         >
-          Join Room 'Room Name'
+          Enter the Room UUID and choose a name for yourself
         </Box>
 
         <TextInput
@@ -112,7 +112,7 @@ const JoinRoom = ({
           //     updateRoomId(e.target.value);
           //   }
           // }}
-          placeholder={'Your name'}
+          placeholder={'Room UUID'}
         />
 
         <TextInput
@@ -121,20 +121,19 @@ const JoinRoom = ({
           // onChange={(e) => {
           //   updateUsername(e.target.value);
           // }}
-          placeholder='Description'
+          placeholder='Your name'
         />
 
         <Button
           data-testid='btn-join-room'
           primary
-          disabled={false}
           // disabled={!roomId || !username}
           label='Join room'
           onClick={async () => {
-            // saveItem(USERNAME_KEY, username);
+            //saveItem(USERNAME_KEY, username);
             const hasAudioPermission = await checkAudioBrowserPermission();
             if (hasAudioPermission) {
-              // joinRoom();
+              //joinRoom();
               setReady(true);
             } else {
               setError(MediaDeviceErrors.mediaBlocked);

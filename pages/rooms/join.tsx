@@ -13,6 +13,10 @@ import { TelnyxMeetContext } from '../../context/TelnyxMeetContext';
 import JoinRoom from '../../components/JoinRoom';
 import { v4 as generatedId } from 'uuid';
 import { API_KEY } from '../_app';
+import Room from '../../components/Room';
+import { generateId } from '../../utils/helpers';
+
+import { NetworkMetrics } from '@telnyx/video';
 
 const breakpointMedium = 1000;
 
@@ -47,6 +51,14 @@ const Join: NextPage = () => {
   console.log(router.query.room_id);
   const room_id = router.query.room_id;
   // const [roomId, setRoomId] = useState<string>();
+
+  const optionalFeatures = {
+    isAudioControlEnabled: false,
+    isDialOutEnabled: false,
+    isNetworkMetricsEnabled: false,
+    isSimulcastEnabled: false,
+  };
+
   const [username, setUsername] = useState<string>('');
   const [tokens, setTokens] = useState<{
     clientToken: string;
@@ -121,7 +133,7 @@ const Join: NextPage = () => {
       },
     });
   };
-  // const [networkMetrics, setNetworkMetrics] = useState<NetworkMetrics>();
+  const [networkMetrics, setNetworkMetrics] = useState<NetworkMetrics>();
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
 
@@ -170,16 +182,25 @@ const Join: NextPage = () => {
             setIsAudioTrackEnabled,
             setIsVideoTrackEnabled,
             sendNotification,
-            // networkMetrics,
-            // setNetworkMetrics,
-            // unreadMessages,
-            // optionalFeatures,
+            networkMetrics,
+            setNetworkMetrics,
+            unreadMessages,
+            optionalFeatures,
             isVideoPlaying,
             setIsVideoPlaying,
           }}
         >
           {isReady ? (
-            <h2>Ready!</h2>
+            // <h2>Ready!</h2>
+            <Room
+              roomId={room_id as string}
+              tokens={tokens}
+              context={{
+                id: generateId(),
+                username: "qewr",
+              }}
+              onDisconnected={onDisconnected}
+            />
           ) : 
           <GridPreviewContainer>
             <MediaPreview />

@@ -8,7 +8,7 @@ import {
   Message,
 } from '@telnyx/video';
 
-// import { DebugContext } from 'contexts/DebugContext';
+import { DebugContext } from '../context/DebugContext';
 import { TelnyxMeetContext } from '../context/TelnyxMeetContext';
 
 const TOKEN_TTL = 50;
@@ -62,12 +62,12 @@ export const useRoom = ({
   context,
   callbacks,
 }: Props): TelnyxRoom | undefined => {
-//   const [_, setDebugState] = useContext(DebugContext);
+  const [_, setDebugState] = useContext(DebugContext);
   const {
     sendNotification,
-    // setNetworkMetrics,
-    // unreadMessages,
-    // optionalFeatures,
+    setNetworkMetrics,
+    unreadMessages,
+    optionalFeatures,
     setIsVideoPlaying,
   } = useContext(TelnyxMeetContext);
   const roomRef = useRef<Room>();
@@ -107,11 +107,11 @@ export const useRoom = ({
         });
 
         setState(roomRef.current.getState());
-        // setDebugState(roomRef.current.getState());
+        setDebugState(roomRef.current.getState());
 
         roomRef.current.on('state_changed', (value) => {
           setState(value);
-        //   setDebugState(value);
+          setDebugState(value);
         });
 
         roomRef.current.on('connected', (state) => {
@@ -140,19 +140,19 @@ export const useRoom = ({
           typeof callbacks?.onConnected === 'function' &&
             callbacks.onConnected();
 
-          // if (
-          //   optionalFeatures.isNetworkMetricsEnabled &&
-          //   state.participants.size > 0 &&
-          //   roomRef.current!.getLocalParticipant().id
-          // ) {
-          //   const participantIds: Array<string> = [];
+          if (
+            optionalFeatures.isNetworkMetricsEnabled &&
+            state.participants.size > 0 &&
+            roomRef.current!.getLocalParticipant().id
+          ) {
+            const participantIds: Array<string> = [];
 
-          //   state.participants.forEach((item) => {
-          //     participantIds.push(item.id);
-          //   });
+            state.participants.forEach((item) => {
+              participantIds.push(item.id);
+            });
 
-          //   roomRef.current!.enableNetworkMetricsReport(participantIds);
-          // }
+            roomRef.current!.enableNetworkMetricsReport(participantIds);
+          }
         });
 
         roomRef.current.on('disconnected', (state) => {
@@ -162,17 +162,17 @@ export const useRoom = ({
         });
 
         roomRef.current.on('participant_joined', (participantId, state) => {
-          // if (
-          //   optionalFeatures.isNetworkMetricsEnabled &&
-          //   state.participants.size > 0
-          // ) {
-          //   const participantIds: Array<string> = [];
-          //   state.participants.forEach((item) => {
-          //     participantIds.push(item.id);
-          //   });
+          if (
+            optionalFeatures.isNetworkMetricsEnabled &&
+            state.participants.size > 0
+          ) {
+            const participantIds: Array<string> = [];
+            state.participants.forEach((item) => {
+              participantIds.push(item.id);
+            });
 
-          //   roomRef.current!.enableNetworkMetricsReport(participantIds);
-          // }
+            roomRef.current!.enableNetworkMetricsReport(participantIds);
+          }
 
           setParticipantsByActivity((value) => {
             return new Set([
@@ -207,12 +207,12 @@ export const useRoom = ({
               }
             }
 
-            // if (
-            //   optionalFeatures.isNetworkMetricsEnabled &&
-            //   state.participants.size > 0
-            // ) {
-            //   roomRef.current!.disableNetworkMetricsReport([participantId]);
-            // }
+            if (
+              optionalFeatures.isNetworkMetricsEnabled &&
+              state.participants.size > 0
+            ) {
+              roomRef.current!.disableNetworkMetricsReport([participantId]);
+            }
           }
         );
 
@@ -233,12 +233,12 @@ export const useRoom = ({
             ]);
           });
 
-          // if (
-          //   optionalFeatures.isNetworkMetricsEnabled &&
-          //   state.participants.size > 0
-          // ) {
-          //   roomRef.current!.disableNetworkMetricsReport([participantId]);
-          // }
+          if (
+            optionalFeatures.isNetworkMetricsEnabled &&
+            state.participants.size > 0
+          ) {
+            roomRef.current!.disableNetworkMetricsReport([participantId]);
+          }
         });
 
         roomRef.current.on('stream_published', (participantId, key, state) => {
@@ -367,18 +367,18 @@ export const useRoom = ({
             const participant = state.participants.get(participantId);
             const fromUsername = JSON.parse(participant.context).username;
 
-            // if (!unreadMessages.current) {
-            //   unreadMessages.current = [];
-            // }
+            if (!unreadMessages.current) {
+              unreadMessages.current = [];
+            }
 
-            // const newMessages = unreadMessages.current.concat({
-            //   from: participantId,
-            //   fromUsername,
-            //   message,
-            //   recipients,
-            // });
+            const newMessages = unreadMessages.current.concat({
+              from: participantId,
+              fromUsername,
+              message,
+              recipients,
+            });
 
-            // unreadMessages.current = newMessages;
+            unreadMessages.current = newMessages;
 
             setMessages({
               from: participantId,
@@ -389,10 +389,10 @@ export const useRoom = ({
           }
         );
 
-        // roomRef.current.on('network_metrics_report', (networkMetrics) => {
-        //   console.debug('network_metrics_report', networkMetrics);
-        //   setNetworkMetrics(networkMetrics);
-        // });
+        roomRef.current.on('network_metrics_report', (networkMetrics) => {
+          console.debug('network_metrics_report', networkMetrics);
+          setNetworkMetrics(networkMetrics);
+        });
       }
 
       await roomRef.current.connect();
