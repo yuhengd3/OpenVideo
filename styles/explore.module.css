@@ -1,0 +1,48 @@
+.icon {
+    color: 7C7A7A;
+
+    padding: 10px;
+    min-width: 0px;
+    text-align: center;
+}
+
+.test {
+    color: red;
+}
+.input_icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.input_field {
+    border: none;
+    width: 100%;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+
+.form {
+    display: inline-block;
+}
+
+.ourButton {
+    background-color: #4EABEA;
+    border-color: #4EABEA;
+
+}
+
+.image_wrapper {
+    margin-left: 50px;
+    margin-top: -28px;
+}
+
+.right {
+    margin-left: 3vw;
+}
+
+.videos{
+    display: flex;
+
+
+}
