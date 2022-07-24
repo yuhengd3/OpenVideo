@@ -15,11 +15,13 @@
     "@telnyx/video": "^0.2.0-alpha.25",
     "@telnyx/video-processors": "^0.0.0-alpha.4",
     "bootstrap": "^5.2.0",
+    "bowser": "^2.11.0",
     "create-next-app": "^12.2.3",
     "grommet": "^2.25.0",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-draggable": "^4.4.5",
     "react-hot-toast": "^2.3.0",
     "styled-components": "^5.3.5",
     "yarn": "^1.22.19"
