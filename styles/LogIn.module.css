@@ -6,6 +6,7 @@
     display: inline-block;
     width: 87%;
     margin-left: 5px;
+    color: #7C7A7A;
 }
 
 .icon {
@@ -32,17 +33,25 @@
     margin-bottom: 25px;
     height: 55px;
     font-size: 18px;
+    color: #7C7A7A;
 }
 
 .submitButton {
     background: #0DCAF0;
-    border-radius: 30px;
+    border-radius: 23px;
     border-color:#0DCAF0;
     font-size: 22px;
     height: 55px;
     width: 87%;
 }
 
-.submitButton :hover{
-    background-color: #127d92;
+.submitButton:hover {
+    background-color:  #4EABEA;
+    border-color:#4EABEA;
+}
+
+.newAccount {   
+    margin-top: 3px;
+    margin-right: 25px;
+    float:left;
 }
