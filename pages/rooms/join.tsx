@@ -11,6 +11,8 @@ import { useRouter } from 'next/router';
 import { TelnyxRoom } from '../../hooks/room';
 import { TelnyxMeetContext } from '../../context/TelnyxMeetContext';
 import JoinRoom from '../../components/JoinRoom';
+import { v4 as generatedId } from 'uuid';
+import { API_KEY } from '../_app';
 
 const breakpointMedium = 1000;
 
@@ -42,7 +44,7 @@ function getUserName(): string {
 
 const Join: NextPage = () => {
   const router = useRouter();
-  console.log(router.query);
+  console.log(router.query.room_id);
   const room_id = router.query.room_id;
   // const [roomId, setRoomId] = useState<string>();
   const [username, setUsername] = useState<string>('');
@@ -67,29 +69,43 @@ const Join: NextPage = () => {
 
   const unreadMessages = useRef<TelnyxRoom['messages'] | null>(null);
 
-  (function (){
-    // console.log(room_id);
-    fetch('http://localhost:3000/api/client_token', {
-      method: 'POST',
-      body: JSON.stringify({
-        room_id: room_id,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+  const getUserTokens = async () => {
+    console.log(room_id);
+    if (typeof room_id === "undefined") {
+      return;
+    }
+    const requestId = generatedId();
+    fetch(
+      `https://api.telnyx.com/v2/rooms/${room_id}/actions/generate_join_client_token`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          refresh_token_ttl_secs: 3600,
+          token_ttl_secs: 60,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${API_KEY}`,
+        },
+      }
+    )
     .then((response) => response.json())
     .then((data) => {
+      console.log(data.data)
       setTokens({
-        clientToken: data.token,
-        refreshToken: data.refresh_token,
+        clientToken: data.data.token,
+        refreshToken: data.data.refresh_token,
       });
-      console.log("User token: " + data.token);
+      console.log("User token: " + data.data.token);
     })
     .catch((error) => {
       console.error('Error:', error);
     });
-  })();
+  }
+  
+  useEffect(() => {
+    getUserTokens();
+  }, [room_id]);
 
   const [isAudioTrackEnabled, setIsAudioTrackEnabled] =
     useState<boolean>(false);

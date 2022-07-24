@@ -4,6 +4,8 @@ import type { AppProps } from 'next/app'
 import { useEffect } from "react";
 import '../styles/globals.css';
 
+export const API_KEY: String = 'KEY01822BBC3492B735E443F3254E85E21B_pfICNYBVMy5fr8GyMuYZwU';
+
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     typeof document !== undefined 
