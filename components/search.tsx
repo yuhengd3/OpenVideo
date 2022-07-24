@@ -25,7 +25,7 @@ function SearchBar() {
     return (
         <div>
         <Head>
-            <script src="https://kit.fontawesome.com/de35c48656.js" crossOrigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/de35c48656.js" crossOrigin="anonymous" async></script>
         </Head>
         <main>
         <Container fluid>

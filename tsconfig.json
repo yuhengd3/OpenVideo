@@ -16,6 +16,6 @@
     "incremental": true,
     "downlevelIteration": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/firebase.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/firebase.js", "components/videos.tsx"],
   "exclude": ["node_modules"]
 }

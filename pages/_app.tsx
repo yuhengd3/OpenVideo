@@ -33,13 +33,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AuthContextProvider>
     <Grommet full plain style={{ position: 'relative' }}>
       <DebugContext.Provider value={[debugState, setDebugState]}>
-      noAuthRequired.includes(router.pathname) ? (
+      { noAuthRequired.includes(router.pathname) ? (
       <Component {...pageProps} />
     ): (
       <ProtectedRoute>
         <Component {...pageProps} />
       </ProtectedRoute>
-    )
+    )}
       </DebugContext.Provider>
     </Grommet>
     </AuthContextProvider>

@@ -5,12 +5,18 @@ import SearchBar from './search'
 import ReactPlayer from 'react-player'
 import {Row, Col, Button, Container, Form, FormControl} from 'react-bootstrap'
 import RoomThumbnail from './RoomThumbnail'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import 'firebase/firestore'
+import { getFirestore, collection, CollectionReference, DocumentData } from 'firebase/firestore'
+import { doc, setDoc } from '@firebase/firestore'
+import 'firebase/firestore';
+import { firestore } from '../config/firebase'
 
-import db from '../config/firebase'
+// import db from '../config/firebase'
 
-import * as firebase from "firebase/app"
+
+
+// import * as firebase from "firebase/app"
 
 // var db = firebase.firestore()
 
@@ -21,18 +27,37 @@ function Videos() {
         Fetchdata();
       });
 
+      // db.collection('users').add({room_id: '1234234'});
+
       const Fetchdata = ()=>{
-        db.collection("rooms").get().then((querySnapshot:any) => {
+        const c = collection(firestore, "rooms")
+        
+        // const userCollection = db.collection('users').add({room_id: '1234234'});
+        // db.collection("rooms").get().then((querySnapshot:any) => {
              
-            // Loop through the data and store
-            // it in array to display
-            querySnapshot.forEach(element => {
-                var data = element.data();
-                setInfo(arr => [...arr , data]);
+        //     // Loop through the data and store
+        //     // it in array to display
+        //     querySnapshot.forEach(element => {
+        //         var data = element.data();
+        //         setInfo(arr => [...arr , data]);
                   
-            });
-        })
+        //     });
+        // })
+        const getUsers = async () => {
+            const userRef = doc(c, 'user_12345');
+            await setDoc(userRef, {
+              age: 30,
+              firstName: 'Jamie',
+              lastName: 'Curnow'
+            })
+            
+        }
+        getUsers();
     }
+
+    useEffect(()=> {
+        Fetchdata();
+    })
     
     return (
         <div className = "videos">
