@@ -46,9 +46,9 @@ function NewRoomModal(props: ModalProps) {
 
                     <div className={styles.inputHeader}>
                         <h5 className={styles.inputLabel}>Upload Cover</h5>
-                        <Button className={styles.submitButton}>Select</Button>
+                        <Button className={styles.selectButton}>Select</Button>
                     </div>
-                    
+                    <Button className={styles.submitButton}>Submit</Button>
                     </Form>
                 </div>
                 </div>
