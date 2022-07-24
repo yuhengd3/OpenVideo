@@ -56,12 +56,12 @@ function Videos() {
     
     return (
         <div className = "videos">
-            <RoomThumbnail name = "Study space" img = "/images/work_jazz.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
-            <RoomThumbnail name = "Study space" img = "/images/work_jazz.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
-            <RoomThumbnail name = "Study space" img = "/images/work_jazz.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
-            <RoomThumbnail name = "Study space" img = "/images/work_jazz.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>   
-            <RoomThumbnail name = "Study space" img = "/images/work_jazz.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
-            <RoomThumbnail name = "Study space" img = "/images/work_jazz.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
+            <RoomThumbnail name = "MUSIC" img = "/images/workjazz.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
+            <RoomThumbnail name = "Animations✨" img = "/images/sponge.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
+            <RoomThumbnail name = "☕️☕️☕️" img = "/images/coffee.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
+            <RoomThumbnail name = "Study space" img = "/images/study.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>   
+            <RoomThumbnail name = "UI Discussion" img = "/images/UI.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
+            <RoomThumbnail name = "Fooooood" img = "/images/donuts.png" description = "Lorem Ipsum" participants = "3" link = "http://www.youtube.com"></RoomThumbnail>
         </div>
         
     )

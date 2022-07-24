@@ -40,7 +40,7 @@ const Signup = () => {
         <div className={styles.inputHeader}>
           <FontAwesomeIcon icon={faUser} className={styles.icon}/>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-        <h5 className={styles.inputLabel}>Your Name</h5>
+        <h5 className={styles.inputLabel}>Your Email</h5>
           <Form.Control
             type="email"
             placeholder="Enter email"
