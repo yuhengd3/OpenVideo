@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faClose } from '@fortawesome/free-solid-svg-icons'
 import {Row, Col, Button, Container, Form, FormControl, Toast} from 'react-bootstrap'
 import {API_KEY} from "../pages/_app"
+import { useRouter } from 'next/router'
 interface ModalProps {
     show: boolean;
     onClose: ()=>void;
@@ -20,6 +21,7 @@ interface ModalProps {
 
 function NewRoomModal(props: ModalProps) {
     const {show, onClose} = props;
+    const router = useRouter();
     const [isBrowser, setIsBrowser] = useState(false);
 
     const [roomName, setRoomName] = useState("");
@@ -43,9 +45,14 @@ function NewRoomModal(props: ModalProps) {
         method: "POST"
         })
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            console.log(data);
+            router.push(`rooms/join?room_id=${data.data.id}`)
+        });
 
         handleClose();
+
+        // router.push(`rooms/join/room_id=${data.id}`)
 
     }
 
