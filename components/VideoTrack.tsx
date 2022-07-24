@@ -4,6 +4,8 @@ import { useState } from 'react';
 // import { getBrowserName, getPlatform } from 'utils/helpers';
 import { VirtualBackground } from '../utils/VirtualBackground';
 
+const getBrowserName = (): string  => "xxx"
+const getPlatform = (): undefined => undefined
 export default function VideoTrack({
   id,
   stream,
@@ -29,25 +31,28 @@ export default function VideoTrack({
       return;
     }
 
-    setIsPortrait(
-      stream.videoTrack.getSettings().height! >
-        stream.videoTrack.getSettings().width!
-    );
+    console.log(stream.videoTrack);
+
+    // setIsPortrait(
+    //   console.log(stream.videoTrack);
+    //   stream.videoTrack?.getSettings()?.height! >
+    //     stream.videoTrack?.getSettings()?.width!
+    // );
 
     videoEl.srcObject = new MediaStream([stream.videoTrack]);
 
     // When Feed update in DOM we need to start virtual background canvas
-    // if (
-    //   virtualBackgroundCamera &&
-    //   virtualBackgroundCamera.current &&
-    //   getBrowserName() === 'chrome' &&
-    //   getPlatform()?.type === 'desktop' &&
-    //   //https://developer.mozilla.org/en-US/docs/Web/API/CanvasCaptureMediaStreamTrack
-    //   //@ts-ignore
-    //   stream.videoTrack instanceof CanvasCaptureMediaStreamTrack
-    // ) {
-    //   virtualBackgroundCamera.current?.start();
-    // }
+    if (
+      virtualBackgroundCamera &&
+      virtualBackgroundCamera.current &&
+      getBrowserName() === 'chrome' &&
+      //getPlatform()?.type === 'desktop' &&
+      //https://developer.mozilla.org/en-US/docs/Web/API/CanvasCaptureMediaStreamTrack
+      //@ts-ignore
+      stream.videoTrack instanceof CanvasCaptureMediaStreamTrack
+    ) {
+      virtualBackgroundCamera.current?.start();
+    }
 
     return function cleanup() {
       if (videoEl) {

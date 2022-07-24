@@ -14,30 +14,30 @@ import {
   faAngleDown,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { TelnyxRoom } from 'hooks/room';
-import { TelnyxMeetContext } from 'contexts/TelnyxMeetContext';
-import ErrorDialog from 'components/ErrorDialog';
+import { TelnyxRoom } from '../../hooks/room';
+import { TelnyxMeetContext } from '../../context/TelnyxMeetContext';
+import ErrorDialog from '../ErrorDialog';
 
-import { getUserMedia } from 'utils/userMedia';
-import {
-  getItemSessionStorage,
-  saveItemSessionStorage,
-  USER_PREFERENCE_BACKGROUND_TYPE,
-} from 'utils/storage';
+import { getUserMedia } from '../../utils/userMedia';
+// import {
+//   getItemSessionStorage,
+//   saveItemSessionStorage,
+//   USER_PREFERENCE_BACKGROUND_TYPE,
+// } from 'utils/storage';
 
 import {
   addVirtualBackgroundStream,
   imagesOptions,
   VirtualBackground,
-} from 'utils/virtualBackground';
+} from '../../utils/VirtualBackground';
 
-import { MenuList } from '../MenuList';
+// import { MenuList } from '../MenuList';
 import { Chat } from '../Chat';
 import { ControllerBox, LeaveButton, RightBoxMenu } from './styles';
 import { DeviceMenuList } from './DeviceMenuList';
 import { ChatButton } from './ChatButton';
 import { ControlButton } from './ControlButton';
-import { getBrowserName, getPlatform } from 'utils/helpers';
+// import { getBrowserName, getPlatform } from 'utils/helpers';
 
 const isSinkIdSupported = (): boolean => {
   const audio = document.createElement('audio');
@@ -91,12 +91,12 @@ export default function RoomControls({
     setAudioInputDeviceId,
     setAudioOutputDeviceId,
     setVideoInputDeviceId,
-    unreadMessages,
+    // unreadMessages,
     isAudioTrackEnabled,
     isVideoTrackEnabled,
     setIsAudioTrackEnabled,
     setIsVideoTrackEnabled,
-    optionalFeatures,
+    // optionalFeatures,
     isVideoPlaying,
   } = useContext(TelnyxMeetContext);
 
@@ -160,7 +160,7 @@ export default function RoomControls({
         audio: localTracks.audio,
         video: {
           track: localTracks.video,
-          options: { enableSimulcast: optionalFeatures.isSimulcastEnabled },
+          // options: { enableSimulcast: optionalFeatures.isSimulcastEnabled },
         },
       });
 
@@ -185,7 +185,7 @@ export default function RoomControls({
           audio: presentationTracks.audio,
           video: {
             track: presentationTracks.video,
-            options: { enableSimulcast: optionalFeatures.isSimulcastEnabled },
+            // options: { enableSimulcast: optionalFeatures.isSimulcastEnabled },
           },
         });
       }
@@ -215,7 +215,7 @@ export default function RoomControls({
       getUserMedia({
         kind: 'video',
         deviceId: videoInputDeviceId,
-        options: optionalFeatures,
+        // options: optionalFeatures,
         callbacks: {
           onTrackUpdate: handleTrackUpdate,
           onDeviceError: handleDeviceError,
@@ -226,105 +226,105 @@ export default function RoomControls({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (
-      isVideoPlaying &&
-      getBrowserName() === 'chrome' &&
-      getPlatform()?.type === 'desktop'
-    ) {
-      const videoElement = document.getElementById(VIDEO_ELEMENT_ID);
+  // useEffect(() => {
+  //   if (
+  //     isVideoPlaying &&
+  //     getBrowserName() === 'chrome' &&
+  //     getPlatform()?.type === 'desktop'
+  //   ) {
+  //     const videoElement = document.getElementById(VIDEO_ELEMENT_ID);
 
-      const backgroundValue = getItemSessionStorage(
-        USER_PREFERENCE_BACKGROUND_TYPE
-      );
+  //     const backgroundValue = getItemSessionStorage(
+  //       USER_PREFERENCE_BACKGROUND_TYPE
+  //     );
 
-      if (videoElement && backgroundValue && backgroundValue !== 'none') {
-        getUserMedia({
-          kind: 'video',
-          deviceId: undefined,
-          options: optionalFeatures,
-          callbacks: {
-            onTrackUpdate: async (
-              kind: 'audio' | 'video',
-              track: MediaStreamTrack | undefined
-            ) => {
-              if (kind === 'video' && track) {
-                if (localTracks.video) {
-                  localTracks.video?.stop();
-                  await videoProcessor.current?.stop();
-                  videoProcessor.current = null;
-                }
+  //     if (videoElement && backgroundValue && backgroundValue !== 'none') {
+  //       getUserMedia({
+  //         kind: 'video',
+  //         deviceId: undefined,
+  //         options: optionalFeatures,
+  //         callbacks: {
+  //           onTrackUpdate: async (
+  //             kind: 'audio' | 'video',
+  //             track: MediaStreamTrack | undefined
+  //           ) => {
+  //             if (kind === 'video' && track) {
+  //               if (localTracks.video) {
+  //                 localTracks.video?.stop();
+  //                 await videoProcessor.current?.stop();
+  //                 videoProcessor.current = null;
+  //               }
 
-                addVirtualBackgroundStream({
-                  videoProcessor: videoProcessor,
-                  camera: camera,
-                  videoElementId: VIDEO_ELEMENT_ID,
-                  canvasElementId: 'canvas',
-                  videoTrack: track,
-                  backgroundValue: backgroundValue,
-                }).then((videoTrack) => {
-                  setVideoInputDeviceId(track.id);
+  //               addVirtualBackgroundStream({
+  //                 videoProcessor: videoProcessor,
+  //                 camera: camera,
+  //                 videoElementId: VIDEO_ELEMENT_ID,
+  //                 canvasElementId: 'canvas',
+  //                 videoTrack: track,
+  //                 backgroundValue: backgroundValue,
+  //               }).then((videoTrack) => {
+  //                 setVideoInputDeviceId(track.id);
 
-                  setLocalTracks((value) => ({
-                    ...value,
-                    video: videoTrack,
-                  }));
+  //                 setLocalTracks((value) => ({
+  //                   ...value,
+  //                   video: videoTrack,
+  //                 }));
 
-                  setVirtualBackgroundType(backgroundValue);
-                });
-              }
-            },
-            onDeviceError: handleDeviceError,
-          },
-        });
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVideoPlaying]);
+  //                 setVirtualBackgroundType(backgroundValue);
+  //               });
+  //             }
+  //           },
+  //           onDeviceError: handleDeviceError,
+  //         },
+  //       });
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isVideoPlaying]);
 
-  const handleVirtualBg = async (selectedValue: string) => {
-    saveItemSessionStorage(USER_PREFERENCE_BACKGROUND_TYPE, selectedValue);
-    setVirtualBackgroundType(selectedValue);
+  // const handleVirtualBg = async (selectedValue: string) => {
+  //   saveItemSessionStorage(USER_PREFERENCE_BACKGROUND_TYPE, selectedValue);
+  //   setVirtualBackgroundType(selectedValue);
 
-    if (localTracks.video) {
-      localTracks.video?.stop();
-      await videoProcessor.current?.stop();
-      videoProcessor.current = null;
+  //   if (localTracks.video) {
+  //     localTracks.video?.stop();
+  //     await videoProcessor.current?.stop();
+  //     videoProcessor.current = null;
 
-      getUserMedia({
-        kind: 'video',
-        deviceId: undefined,
-        callbacks: {
-          onTrackUpdate: async (
-            kind: 'audio' | 'video',
-            track: MediaStreamTrack | undefined
-          ) => {
-            if (kind === 'video' && track) {
-              const canvasVideoTrack = await addVirtualBackgroundStream({
-                videoProcessor,
-                camera,
-                videoElementId: VIDEO_ELEMENT_ID,
-                canvasElementId: 'canvas',
-                videoTrack: track,
-                backgroundValue: selectedValue,
-              });
+  //     getUserMedia({
+  //       kind: 'video',
+  //       deviceId: undefined,
+  //       callbacks: {
+  //         onTrackUpdate: async (
+  //           kind: 'audio' | 'video',
+  //           track: MediaStreamTrack | undefined
+  //         ) => {
+  //           if (kind === 'video' && track) {
+  //             const canvasVideoTrack = await addVirtualBackgroundStream({
+  //               videoProcessor,
+  //               camera,
+  //               videoElementId: VIDEO_ELEMENT_ID,
+  //               canvasElementId: 'canvas',
+  //               videoTrack: track,
+  //               backgroundValue: selectedValue,
+  //             });
 
-              setVideoInputDeviceId(track.id);
+  //             setVideoInputDeviceId(track.id);
 
-              setLocalTracks((value) => ({
-                ...value,
-                video:
-                  selectedValue && selectedValue !== 'none'
-                    ? canvasVideoTrack
-                    : track,
-              }));
-            }
-          },
-          onDeviceError: handleDeviceError,
-        },
-      });
-    }
-  };
+  //             setLocalTracks((value) => ({
+  //               ...value,
+  //               video:
+  //                 selectedValue && selectedValue !== 'none'
+  //                   ? canvasVideoTrack
+  //                   : track,
+  //             }));
+  //           }
+  //         },
+  //         onDeviceError: handleDeviceError,
+  //       },
+  //     });
+  //   }
+  // };
 
   const handleTrackUpdate = (
     kind: 'audio' | 'video',
@@ -400,15 +400,15 @@ export default function RoomControls({
         videoProcessor.current = null;
       }
 
-      saveItemSessionStorage(USER_PREFERENCE_BACKGROUND_TYPE, 'none');
-      setVirtualBackgroundType('none');
+      // saveItemSessionStorage(USER_PREFERENCE_BACKGROUND_TYPE, 'none');
+      // setVirtualBackgroundType('none');
 
       handleTrackUpdate('video', undefined);
     } else {
       getUserMedia({
         kind: 'video',
         deviceId: videoInputDeviceId,
-        options: optionalFeatures,
+        // options: optionalFeatures,
         callbacks: {
           onTrackUpdate: handleTrackUpdate,
           onDeviceError: handleDeviceError,
@@ -475,7 +475,7 @@ export default function RoomControls({
         getUserMedia({
           kind: 'video',
           deviceId: deviceId,
-          options: optionalFeatures,
+          // options: optionalFeatures,
           callbacks: {
             onTrackUpdate: handleTrackUpdate,
             onDeviceError: handleDeviceError,
@@ -506,9 +506,9 @@ export default function RoomControls({
   };
 
   const hasUnreadMessages = () => {
-    if (unreadMessages.current && unreadMessages.current.length > 0) {
-      return true;
-    }
+    // if (unreadMessages.current && unreadMessages.current.length > 0) {
+    //   return true;
+    // }
     return false;
   };
 
@@ -526,12 +526,12 @@ export default function RoomControls({
     return false;
   };
 
-  const getTotalUnreadMessages = () => {
-    if (!unreadMessages || !unreadMessages.current) {
-      return 1;
-    }
-    return unreadMessages.current.length;
-  };
+  // const getTotalUnreadMessages = () => {
+  //   if (!unreadMessages || !unreadMessages.current) {
+  //     return 1;
+  //   }
+  //   return unreadMessages.current.length;
+  // };
 
   const showBubbleNotification = checkBubbleNotification();
 
@@ -556,7 +556,7 @@ export default function RoomControls({
           messages={messages}
           onClose={() => {
             setShowChatBox(false);
-            unreadMessages.current = [];
+            // unreadMessages.current = [];
           }}
           localParticipant={localParticipant}
         ></Chat>
@@ -649,7 +649,7 @@ export default function RoomControls({
             </Box>
           </Button>
         </ControllerBox>
-        {optionalFeatures.isDialOutEnabled && (
+        {/* {optionalFeatures.isDialOutEnabled && (
           <ControllerBox width='80px'>
             <Button
               data-testid='btn-invite-participant'
@@ -672,17 +672,17 @@ export default function RoomControls({
               </Box>
             </Button>
           </ControllerBox>
-        )}
+        )} */}
 
         {localParticipant.canReceiveMessages && (
           <ControllerBox>
             <ChatButton
               onClick={() => {
                 setShowChatBox((value) => !value);
-                unreadMessages.current = [];
+                // unreadMessages.current = [];
               }}
-              totalUnreadMessages={
-                showBubbleNotification ? getTotalUnreadMessages() : 0
+              totalUnreadMessages={ 0
+                // showBubbleNotification ? getTotalUnreadMessages() : 0
               }
               isChatBoxOpened={showChatBox}
             />
@@ -691,7 +691,7 @@ export default function RoomControls({
       </Box>
 
       <RightBoxMenu pad='small' direction='row' gap='large'>
-        {getBrowserName() === 'chrome' && getPlatform()?.type === 'desktop' && (
+        {/* {getBrowserName() === 'chrome' && getPlatform()?.type === 'desktop' && (
           <span style={{ color: '#fff' }}>
             <MenuList
               disabled={!selfStream?.isVideoEnabled}
@@ -706,9 +706,9 @@ export default function RoomControls({
               }}
             ></MenuList>
           </span>
-        )}
+        )} */}
 
-        {optionalFeatures && optionalFeatures.isAudioControlEnabled && (
+        {/* {optionalFeatures && optionalFeatures.isAudioControlEnabled && (
           <Box>
             <Button
               onClick={() => {
@@ -720,7 +720,7 @@ export default function RoomControls({
               }`}</Text>
             </Button>
           </Box>
-        )}
+        )} */}
 
         <DeviceMenuList
           kind='audio_input'

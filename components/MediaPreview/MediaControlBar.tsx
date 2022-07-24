@@ -31,12 +31,12 @@ import React, {
   // } from 'utils/storage';
   
   import { MediaDeviceErrors } from './helper';
-  // import {
-  //   addVirtualBackgroundStream,
-  //   imagesOptions,
-  //   VirtualBackground,
-  // } from 'utils/virtualBackground';
-  // import { MenuList } from 'components/MenuList';
+  import {
+    addVirtualBackgroundStream,
+    imagesOptions,
+    VirtualBackground,
+  } from '../../utils/VirtualBackground';
+  import { MenuList } from '../MenuList';
   // import { getBrowserName, getPlatform } from 'utils/helpers';
   
   const breakpointLarge = 1450;
@@ -88,12 +88,12 @@ import React, {
     // videoProcessor: VirtualBackground['videoProcessor'];
     videoProcessor: MutableRefObject<VideoProcessor | null>;
   }) {
-    // const [virtualBackgroundType, setVirtualBackgroundType] = useState<
-    //   string | undefined
-    // >();
+    const [virtualBackgroundType, setVirtualBackgroundType] = useState<
+      string | undefined
+    >();
   
-    // const [showVirtualBackgroundFeature, setShowVirtualBackgroundFeature] =
-    //   useState(false);
+    const [showVirtualBackgroundFeature, setShowVirtualBackgroundFeature] =
+      useState(false);
   
     const router = useRouter();
   
@@ -230,7 +230,7 @@ import React, {
           videoRef.current.srcObject = null;
         }
         // saveItemSessionStorage(USER_PREFERENCE_BACKGROUND_TYPE, 'none');
-        // setVirtualBackgroundType('none');
+        setVirtualBackgroundType('none');
         await handleTrackUpdate('video', undefined);
       } else {
         getUserMedia({
@@ -245,72 +245,72 @@ import React, {
       }
     };
   
-    // const handleVirtualBg = async (selectedValue: string) => {
-    //   // saveItemSessionStorage(USER_PREFERENCE_BACKGROUND_TYPE, selectedValue);
-    //   // setVirtualBackgroundType(selectedValue);
+    const handleVirtualBg = async (selectedValue: string) => {
+      //saveItemSessionStorage(USER_PREFERENCE_BACKGROUND_TYPE, selectedValue);
+      setVirtualBackgroundType(selectedValue);
   
-    //   if (localTracks.video) {
-    //     localTracks.video?.stop();
-    //     await videoProcessor.current?.stop();
-    //     videoProcessor.current = null;
-    //     setLocalTracks((value) => ({
-    //       ...value,
-    //       video: undefined,
-    //     }));
+      if (localTracks.video) {
+        localTracks.video?.stop();
+        await videoProcessor.current?.stop();
+        videoProcessor.current = null;
+        setLocalTracks((value) => ({
+          ...value,
+          video: undefined,
+        }));
   
-    //     getUserMedia({
-    //       kind: 'video',
-    //       deviceId: undefined,
-    //       options: optionalFeatures,
-    //       callbacks: {
-    //         onTrackUpdate: async (
-    //           kind: 'audio' | 'video',
-    //           track: MediaStreamTrack | undefined
-    //         ) => {
-    //           if (kind === 'video' && track) {
-    //             const canvasVideoTrack = await addVirtualBackgroundStream({
-    //               videoProcessor: videoProcessor,
-    //               camera: camera,
-    //               videoElementId: 'video-preview',
-    //               canvasElementId: 'canvas',
-    //               videoTrack: track,
-    //               backgroundValue: selectedValue,
-    //             });
+        getUserMedia({
+          kind: 'video',
+          deviceId: undefined,
+          options: optionalFeatures,
+          callbacks: {
+            onTrackUpdate: async (
+              kind: 'audio' | 'video',
+              track: MediaStreamTrack | undefined
+            ) => {
+              if (kind === 'video' && track) {
+                const canvasVideoTrack = await addVirtualBackgroundStream({
+                  videoProcessor: videoProcessor,
+                  camera: camera,
+                  videoElementId: 'video-preview',
+                  canvasElementId: 'canvas',
+                  videoTrack: track,
+                  backgroundValue: selectedValue,
+                });
   
-    //             setLocalTracks((value) => ({
-    //               ...value,
-    //               video:
-    //                 selectedValue && selectedValue !== 'none'
-    //                   ? canvasVideoTrack
-    //                   : track,
-    //             }));
-    //           }
-    //         },
-    //         onDeviceError: handleDeviceError,
-    //       },
-    //     });
-    //   }
-    // };
+                setLocalTracks((value) => ({
+                  ...value,
+                  video:
+                    selectedValue && selectedValue !== 'none'
+                      ? canvasVideoTrack
+                      : track,
+                }));
+              }
+            },
+            onDeviceError: handleDeviceError,
+          },
+        });
+      }
+    };
   
-    // const renderSelectBackgroungImage = () => {
-    //   return (
-    //     <span style={{ color: '#fff' }}>
-    //       <MenuList
-    //         disabled={!isVideoTrackEnabled}
-    //         selectedValue={virtualBackgroundType}
-    //         size='small'
-    //         title='Change background'
-    //         data={imagesOptions}
-    //         onChange={(item) => handleVirtualBg(item.value)}
-    //         icon={<FontAwesomeIcon icon={faAngleDown} fixedWidth />}
-    //         itemsIconOptions={{
-    //           gap: 'small', // gap between icon and text
-    //           reverse: true, // icon on right
-    //         }}
-    //       ></MenuList>
-    //     </span>
-    //   );
-    // };
+    const renderSelectBackgroungImage = () => {
+      return (
+        <span style={{ color: '#fff' }}>
+          <MenuList
+            disabled={!isVideoTrackEnabled}
+            selectedValue={virtualBackgroundType}
+            size='small'
+            title='Change background'
+            data={imagesOptions}
+            onChange={(item) => handleVirtualBg(item.value)}
+            icon={<FontAwesomeIcon icon={faAngleDown} fixedWidth />}
+            itemsIconOptions={{
+              gap: 'small', // gap between icon and text
+              reverse: true, // icon on right
+            }}
+          ></MenuList>
+        </span>
+      );
+    };
   
     return (
       <React.Fragment>
@@ -354,7 +354,7 @@ import React, {
             </Text>
           </Box>
         </Button>
-        {/* {showVirtualBackgroundFeature && renderSelectBackgroungImage()} */}
+        {showVirtualBackgroundFeature && renderSelectBackgroungImage()}
       </React.Fragment>
     );
   }

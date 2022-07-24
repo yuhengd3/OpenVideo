@@ -13,8 +13,11 @@ import { TelnyxMeetContext } from '../../context/TelnyxMeetContext';
 import JoinRoom from '../../components/JoinRoom';
 import { v4 as generatedId } from 'uuid';
 import { API_KEY } from '../_app';
+import Room from '../../components/Room';
 
 const breakpointMedium = 1000;
+
+const generateId = (): number => Math.ceil(Math.random() * 1000000);
 
 const GridPreviewContainer = styled.div`
   display: grid;
@@ -38,7 +41,7 @@ function getUserName(): string {
   if (user) {
     return user;
   } else {
-    return Math.random().toString();
+    return "yuheng Ding";
   }
 }
 
@@ -179,7 +182,15 @@ const Join: NextPage = () => {
           }}
         >
           {isReady ? (
-            <h2>Ready!</h2>
+            <Room 
+              roomId={room_id as string}
+              tokens={tokens}
+              context={{
+                id: generateId(),
+                username,
+              }}
+              onDisconnected={onDisconnected}
+            />
           ) : 
           <GridPreviewContainer>
             <MediaPreview />
