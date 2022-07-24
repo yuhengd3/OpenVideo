@@ -3,7 +3,7 @@ import { Box, Button, TextInput } from 'grommet';
 
 import ErrorDialog from './ErrorDialog';
 import { MediaDeviceErrors } from './MediaPreview/helper';
-
+import styles from '../styles/JoinRoom.module.css'
 import { saveItem, USERNAME_KEY } from '../utils/storage';
 
 interface Props {
@@ -101,19 +101,10 @@ const JoinRoom = ({
           round='xsmall'
           pad='small'
         >
-          Enter the Room UUID and choose a name for yourself
+          Welcome!
         </Box>
 
-        <TextInput
-          data-testid='input-room-uuid'
-          // value={roomId}
-          // onChange={(e) => {
-          //   if (typeof updateRoomId === 'function') {
-          //     updateRoomId(e.target.value);
-          //   }
-          // }}
-          placeholder={'Room UUID'}
-        />
+        
 
         <TextInput
           data-testid='input-username'
@@ -125,8 +116,9 @@ const JoinRoom = ({
         />
 
         <Button
+          className={styles.custom_btn}
           data-testid='btn-join-room'
-          primary
+          
           // disabled={!roomId || !username}
           label='Join room'
           onClick={async () => {
