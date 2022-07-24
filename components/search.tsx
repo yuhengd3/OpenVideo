@@ -37,7 +37,7 @@ function SearchBar() {
                     <div className="input-group shadow p-1 mb-5 bg-white rounded">
                         <input className="form-control border-0" type="text" placeholder="Search" id="example-search-input"/>
                         <span className="input-group-append">
-                            <button className="btn bg-white border-0 ms-n3" type="button">
+                            <button className="btn border-0" type="button">
                                 <i className={`fa-solid fa-magnifying-glass fa-lg ${styles.icon}`}></i>
                             </button>
                         </span>

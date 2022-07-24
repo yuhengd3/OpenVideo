@@ -4,13 +4,20 @@ import Image from 'next/image'
 import SearchBar from '../components/search'
 import Videos from '../components/videos'
 import {Row, Col, Button, Container, Form, FormControl} from 'react-bootstrap'
+import { useState } from 'react'
+import NewRoomModal from '../components/newroommodal'
+
 
 function ExplorePage() {
+    const [showModal, setShowModal] = useState(false);
     return (
         <div>
             <SearchBar/>
             <Container>
                 <Videos/>
+                <div id="modal_root"></div>
+                <Button onClick={() => setShowModal(true)}>show modal</Button>
+                <NewRoomModal show={showModal} onClose={()=>setShowModal(false)}></NewRoomModal>
             </Container>
         </div>
         
