@@ -44,6 +44,8 @@ function NewRoomModal(props: ModalProps) {
         .then((response) => response.json())
         .then((data) => console.log(data));
 
+        handleClose();
+
     }
 
     useEffect(()=>{
