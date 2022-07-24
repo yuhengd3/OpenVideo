@@ -8,6 +8,8 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import { Link } from 'react-router-dom';
+
 const LogIn: NextPage = () => {
     return (
         <div className={styles.container}>
@@ -26,6 +28,12 @@ const LogIn: NextPage = () => {
                 </div>
             </Form>
             <Button className={styles.submitButton}>Login</Button>
+            
+            <div className={styles.inputHeader}>
+                <h5 className={styles.newAccount}>New to ______?    </h5>
+                {/* <Link to="/sign-up">Create an Account.</Link> */}
+                <h5 className={styles.newAccount}>Create a new account</h5>
+            </div>
         </div>
         
     )
