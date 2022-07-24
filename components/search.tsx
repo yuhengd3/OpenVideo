@@ -2,9 +2,11 @@ import Head from 'next/head'
 import styles from '../styles/explore.module.css'
 import Image from 'next/image'
 import {Toast, Row, Col, Button, Container, Form, FormControl} from 'react-bootstrap'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
 function SearchBar() {
     const handleClick = () => {
+        console.log("handle click");
         return (
             <>
                 <Toast>
@@ -45,7 +47,7 @@ function SearchBar() {
                     <i className={`fa-solid fa-circle-plus fa-xl ${styles.icon}`}></i>
                     <div className={styles.image_wrapper} >
                     <img
-                        onClick={() => handleClick()}
+                        onClick={handleClick}
                         className="avatar"
                         src="/images/profile.jpg" // Route of the image file
                         height={30} // Desired size with correct aspect ratio
