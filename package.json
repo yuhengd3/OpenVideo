@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "boostrap": "^2.0.0",
     "bootstrap": "^5.2.0",
     "firebase": "^9.9.1",
@@ -16,6 +18,8 @@
     "react": "18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "18.2.0",
+    "react-fontawesome": "^1.7.1",
+    "react-router-dom": "^6.3.0",
     "yarn": "^1.22.19"
   },
   "devDependencies": {

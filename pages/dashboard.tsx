@@ -20,6 +20,9 @@ const Dashboard = ({children}: {children: React.ReactNode}) => {
 
   return (
       <>
+      {
+          user ? children: null
+      }
         children
       </>
       

@@ -3,6 +3,13 @@ import { Button, Form } from 'react-bootstrap'
 import { useAuth } from '../context/authContext'
 import { useRouter } from 'next/router'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faLock, faEnvelope, faE } from '@fortawesome/free-solid-svg-icons'
+import styles from '../styles/LogIn.module.css'
+
+
+import { Link } from 'react-router-dom';
+
 
 const Signup = () => {
     const router = useRouter()
@@ -27,16 +34,13 @@ const Signup = () => {
   }
 
   return (
-    <div
-      style={{
-        width: '40%',
-        margin: 'auto',
-      }}
-    >
-      <h1 className="text-center my-3 ">Signup</h1>
+      <div className={styles.container}>
+      <h2 className={styles.head}>Sign Up</h2>        
       <Form onSubmit={handleSignup}>
+        <div className={styles.inputHeader}>
+          <FontAwesomeIcon icon={faUser} className={styles.icon}/>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+        <h5 className={styles.inputLabel}>Your Name</h5>
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -50,9 +54,11 @@ const Signup = () => {
             value={data.email}
           />
         </Form.Group>
-
+        </div>
+        <div className={styles.inputHeader}>
+        <FontAwesomeIcon icon={faEnvelope} className={styles.icon}/>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+        <h5 className={styles.inputLabel}>Your Password</h5>
           <Form.Control
             type="password"
             placeholder="Password"
@@ -66,8 +72,9 @@ const Signup = () => {
             value={data.password}
           />
         </Form.Group>
+        </div>
 
-        <Button variant="primary" type="submit">
+        <Button className={styles.submitButton} variant="primary" type="submit">
           Signup
         </Button>
       </Form>
