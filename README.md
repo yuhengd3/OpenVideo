@@ -13,10 +13,10 @@ Keyboard Enthusiasts Virtual Meet </br>
 
 <p align="center">
   <!-- img src="./public/left.PNG" width="351" height="759" --->
-  <img src="./demo/LoginPage" width="850" height="530">
-  <img src="./demo/MainPage" width="850" height="530">
-  <img src="./demo/WaitingRoom" width="850" height="530">
-  <img src="./demo/MainRoom" width="850" height="530">
+  <img src="./demo/LoginPage.png" width="850" height="530">
+  <img src="./demo/MainPage.png" width="850" height="530">
+  <img src="./demo/WaitingRoom.png" width="850" height="530">
+  <img src="./demo/VideoRoom.png" width="850" height="530">
 </p>
 
 ## Author
